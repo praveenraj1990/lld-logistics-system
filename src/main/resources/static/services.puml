@@ -1,0 +1,39 @@
+@startuml
+interface orderService{
+    Order takeAnOrder(Order order);
+    Order getOrder(String orderId);
+    boolean cancelOrder(Order order);
+    List<Order> getOrders(Customer customer);
+}
+
+interface ShipmentCronService{
+    void processCreatedOrder();
+}
+
+interface DriverService{
+    Driver getAvailableDriver();
+    void updateLocation(Driver driver, Location location);
+}
+
+interface NotificationService{
+    void notification(String message, Contact contact);
+}
+
+interface shipmentService{
+    Shipment createShipment(Order order);
+    Shipment getShipment(String orderId);
+}
+
+interface TrackService{
+    void trackOrder(Customer customer, Order order)
+}
+
+interface AccountCreation{
+    Account createNewAccount();
+}
+
+interface UserService{
+    void registerNewUser(User user);
+}
+
+@enduml

@@ -1,0 +1,184 @@
+@startuml
+
+abstract class Account{
+    String id;
+    String username;
+    String password;
+    String lastdateaccessed;
+    String createddate;
+    AccountType accountType;
+}
+
+class Customer extends Account{
+    String name;
+    PersonalInfo info;
+    Contact contact;
+    Address address;
+    Location currentLocation;
+}
+
+class Contact{
+    String email;
+    String mobile;
+}
+
+class Driver extends Account{
+    String name;
+    PersonalInfo info;
+    Contact contact;
+    Address address;
+    Vehicle vehicle;
+    Location currentLocation;
+}
+
+class Admin extends Account{
+    String name;
+    PersonalInfo info;
+    Contact contact;
+    Address address;
+}
+
+class Location {
+    double lat,long;
+}
+
+class Client{
+    String id;
+}
+
+enum OrderType{
+    Metallic,
+    Glass
+}
+
+enum OrderCategory{
+    Food,
+    Electronics,
+    Clothes
+}
+
+enum VehicleType{
+    Bike,
+    Truck
+}
+
+class Vehicle{
+    String id;
+    String licenseNo;
+    Owner owner;
+    VehicleType vehicleType;
+    Date procuredDate;
+    Date expiredDate;
+    int capacity;
+    Location currentLocation;
+    VehicleStatus status;
+}
+
+class bike extends Vehicle{
+capacity=10;
+}
+
+class truck extends Vehicle{
+capacity=100;
+}
+
+enum VehicleStatus {
+    FREE,
+    BUSY,
+    NOT_WORKING;
+}
+
+class Order{
+    String orderId;
+    Date createdDate;
+    Client client;
+    String clientOrderId;
+    OrderCategory orderCategory;
+    OrderType orderType;
+    Location origLocation;
+    Location deliveredLocation;
+    Customer customer;
+    OrderStatus orderStatus;
+    String orderReason;
+    List<Item> items;
+    OrderPriority orderPriority;
+    PaymentDetails paymentDetails;
+    Long totalWeight;
+
+}
+
+enum OrderPriority {
+    LOW,
+    MEDIUM,
+    HIGH;
+}
+
+class item{
+    Integer weight;
+    int price;
+    int volume;
+    String name;
+}
+
+enum OrderStatus{
+    CREATED,
+    SHIPMENT_INITIATED,
+    COMPLETED,
+    FAILED,
+    CANCELLED
+}
+
+class Shipment{
+    String shipmentId;
+    Order orderId;
+    Driver driver;
+    Location deliveredLocation;
+    Location origLocation;
+    ShipmentStatus shipmentStatus;
+    Customer customer;
+    String reason;
+    Date deliveryDate;
+}
+
+enum ShipmentStatusStatus{
+    CREATED,
+    INPROCESS,
+    SHIPPED,
+    UNDELIVERED
+}
+
+class ShipmentLog{
+    String shipmentLogId;
+    Shipment shipment;
+    String description;
+    ShipmentStatusStatus status;
+    Date shipmentDate;
+}
+
+enum ShipmentLogStatus{
+    INITATED,
+    INPROCESS
+    DELIVERED
+}
+
+
+enum PaymentMode {
+    NET_BANKING,
+    CREDIT_CARD,
+    DEBIT_CARD;
+}
+
+enum PaymentStatus {
+    PAID,
+    UNPAID;
+}
+
+class PaymentDetails {
+    String transactionId;
+    PaymentMode paymentMode;
+    int amount;
+    PaymentStatus paymentStatus;
+    String cardNumber;
+}
+
+@enduml
